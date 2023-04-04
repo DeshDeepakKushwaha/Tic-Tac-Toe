@@ -1,0 +1,178 @@
+*,
+::after,
+*::before {
+  box-sizing: border-box;
+}
+:root {
+  --cell-size: 90px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+body {
+  background: linear-gradient(135deg, #8052ec, #d161ff);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.board {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+  align-content: center; /* centers the cell */
+  align-items: center; /* centers the item in cell */
+  grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before {
+  background: linear-gradient(135deg, #8052ec, #d161ff);
+}
+
+.cell.x,
+.cell.o {
+  cursor: not-allowed;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+  background-color: lightgray;
+}
+
+/* only apply hover when u are not on x and o class */
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover:before,
+.board.x .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  /* bpth then placed at top of each other */
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+  transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+  transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover:before,
+.board.o .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  /* bpth then placed at top of each other */
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
+  background-color: white;
+}
+
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background: linear-gradient(135deg, #8052ec, #d161ff);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 5rem;
+  flex-direction: column;
+
+  text-align: center;
+}
+
+.message {
+  color: #ffffff;
+  text-align: center;
+  font-size: 5rem;
+  margin: 4px;
+}
+.winning-message button {
+  margin: 4px;
+  cursor: pointer;
+  font-size: 2.5rem;
+  padding: 0.5em 1em;
+  background-color: #0a0027;
+  color: #ffffff;
+  border-radius: 0.2em;
+  border: none;
+}
+.winning-message button:hover {
+  background-color: rgb(30, 29, 29);
+}
+.winning-message.show {
+  display: flex;
+}
+
+.footer {
+  width: 100%;
+  padding: 30px 0;
+  z-index: 2;
+  margin-top: auto;
+}
+.footer .social {
+  text-align: center;
+  padding-bottom: 25px;
+  color: white;
+}
+.footer .social a {
+  font-size: 24px;
+  color: inherit;
+  border: 1px solid #ccc;
+  width: 40px;
+  height: 40px;
+  line-height: 38px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0 8px;
+  opacity: 0.75;
+}
+.footer .social a:hover {
+  opacity: 0.9;
+}
+
+.footer .copyright {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 20px;
+  color: black;
+}
