@@ -55,6 +55,10 @@ function handleClick(e) {
 
     setBoardHoverClass();
   }
+
+  // create an Audio object
+  var audio = new Audio("./sound.mpeg");
+  audio.play();
 }
 
 function placeMark(cell, currentClass) {
